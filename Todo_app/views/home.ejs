@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Page title from a dynamic value "title" -->
+    <title>
+        <%=title%>
+    </title>
+    <!-- External CSS stylesheet -->
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- Font Awesome icon kit -->
+    <script src="https://kit.fontawesome.com/04df42bcc4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Main container for the entire page -->
+    <div class="main-container">
+        <!-- Heading section -->
+        <div class="heading">TODO APP</div>
+        <!-- Form to create a new todo, action attribute points to "/create-todo" and uses POST method -->
+        <form action="/create-todo" method="POST">
+            <!-- Section to add a new todo item -->
+            <div class="add-item-section">
+                <!-- Description input field -->
+                <div class="desc">
+                    <div class="discription">
+                        <div>Description</div>
+                        <div>
+                            <input type="description" name="description" placeholder="Add the todo Here" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Category and Due Date inputs -->
+                <div class="cat-date">
+                    <!-- Category selection dropdown -->
+                    <div class="cat">
+                        <div>Category</div>
+                        <div>
+                            <select name="category" id="category">
+                                <option>PERSONAL</option>
+                                <option>WORK</option>
+                                <option>SCHOOL</option>
+                                <option>CLEANING</option>
+                                <option>OTHER</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Due Date input -->
+                    <div class="due-date">
+                        <div>Due Date</div>
+                        <div>
+                            <input type="date" name="date" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button to submit the form and add the todo -->
+            <button type="submit" class="add-todo"><i class="fa-solid fa-plus"></i>ADD Todo</button>
+        </form>
+
+        <!-- Section to display the todos and an option to delete todos -->
+        <div class="display-todo" id="del">
+            <!-- Form to delete todos, action attribute points to "delete-todo" and uses POST method -->
+            <form action="delete-todo" method="post">
+                <!-- Delete todo button -->
+                <div class="del-bar">
+                    <button type="submit" class="del-todo"><i class="fa-solid fa-trash-can"></i>DELETE Todo</button>
+                </div>
+                <br />
+
+                <!-- Loop through the "todo" array to display individual todos -->
+                <div>
+                    <% for( let i of todo ){%>
+                        <!-- Todo item display -->
+                        <div class="todos-display">
+                            <!-- Checkbox to mark todo completion, name attribute uses the todo ID for identification -->
+                            <div class="check-box">
+                                <input type="checkbox" name="<%= i._id %>" />
+                            </div>
+                            <!-- Todo description and due date -->
+                            <div class="des-date">
+                                <div class="desciption">
+                                    <%=i.description%>
+                                </div>
+                                <div class="due-date"><i class="fa-solid fa-calendar-days"></i>
+                                    <%= i.date%>
+                                </div>
+                            </div>
+                            <!-- Todo category -->
+                            <div class="category">
+                                <%=i.category%>
+                            </div>
+                        </div>
+                        <%}%>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
